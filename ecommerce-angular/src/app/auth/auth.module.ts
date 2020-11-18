@@ -18,7 +18,7 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-      { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] }
+      { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
     ]
   }
 ];
@@ -27,7 +27,7 @@ const routes: Routes = [
   declarations: [
     RegisterComponent,
     LoginComponent,
-    AuthComponent
+    AuthComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

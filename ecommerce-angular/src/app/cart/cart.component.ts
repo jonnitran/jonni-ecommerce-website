@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 import { Item } from '../products/cartItem';
-import { ProductService } from '../products/product.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
 	templateUrl: 'cart.component.html'
@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
 		private productService: ProductService	//DI for service
 	) { }
 
-	ngOnInit() {
+	ngOnInit() {/* 
 		this.activatedRoute.params.subscribe(params => {
 			var id = params['id'];
 			if (id) {
@@ -57,7 +57,7 @@ export class CartComponent implements OnInit {
 			} else {
 				this.loadCart();
 			}
-		});
+		}); */
 	}
 
 	loadCart(): void {

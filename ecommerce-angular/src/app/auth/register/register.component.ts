@@ -2,13 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth.service';
 import { Router } from '@angular/router';
 
+if (document.getElementById('customer')){
+
+}
+
+var accountType: any;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
 
+  
   formData: any = {};
   errors: any = [];
 

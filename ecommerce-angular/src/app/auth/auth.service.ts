@@ -36,6 +36,13 @@ export class AuthService {
     }));
   }
 
+  public adminlogin(userData: any): Observable<any> {
+    const URI = this.uriseg + '/adminlogin';
+    return this.http.post(URI, userData).pipe(map(token => {
+      return this.saveToken(token);
+    }));
+  }
+
   private saveToken(token: any): any {
     this.decodedToken = jwt.decodeToken(token);
     localStorage.setItem('auth_tkn', token);
