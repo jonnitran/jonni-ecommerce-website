@@ -1,0 +1,83 @@
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Company</th>
+                <th>Product Image</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products;let rowIndex=index">
+                <td>{{product._id}}</td>
+                <td>{{product.name}}</td>
+                <td>${{product.price}}</td>
+                <td>{{product.company}}</td>
+                <td><img src="{{product.image}}" class="heightSet"></td>
+                <td>
+                    <button [routerLink]="['/product-edit',product._id]" class="btn btn-primary">Edit</button>
+                    <button (click)="deleteProduct(product._id)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <form class="container" #addProductForm="ngForm" >
+        <h3>Add new Company</h3>
+        <div>
+            <label>ID: </label><br>
+            <input name="id" type="number" class="form-control" [(ngModel)]="_id" #idInput="ngModel" required><br>
+        </div>
+        <div *ngIf="idInput.invalid && (idInput.dirty || idInput.touched)" class="alert alert-danger">
+            <div *ngIf="idInput.errors.required">
+                ID is required and must be a number.
+            </div>
+        </div>
+        <div>
+            <label>Name: </label><br>
+            <input name="name" type="text" class="form-control" [(ngModel)]="name" #nameInput="ngModel" required><br>
+        </div>
+        <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="alert alert-danger">
+            <div *ngIf="nameInput.errors.required">
+                Name is required.
+            </div>
+        </div>
+        <div>
+            <label>Price: </label><br>
+            <input name="price" type="number" class="form-control" [(ngModel)]="price" step=".01" #priceInput="ngModel" required><br>
+        </div>
+        <div *ngIf="priceInput.invalid && (priceInput.dirty || priceInput.touched)" class="alert alert-danger">
+            <div *ngIf="priceInput.errors.required">
+                Price is required and must be a number.
+            </div>
+        </div>
+        <div>
+            <label>Image Link: </label><br>
+            <input name="image" type="text" class="form-control" [(ngModel)]="image" #imageInput="ngModel" required><br>
+        </div>
+        <div *ngIf="imageInput.invalid && (imageInput.dirty || imageInput.touched)" class="alert alert-danger">
+            <div *ngIf="imageInput.errors.required">
+                Image link is required.
+            </div>
+        </div>
+        <div>
+            <label>Company: </label><br>
+            <select name="company" class="selectpicker dropdown form-control" [(ngModel)]="company" data-live-search="true">
+                <option *ngFor="let company of companies" [value]="company.name">{{company.name}}</option>
+            </select>
+        </div>
+        <br>
+        <input type="submit" class="btn btn-success" value="add" (click)="addNewProduct()" [disabled]="!addProductForm.form.valid">
+        <br><br>
+        <div *ngIf="errors.length > 0" class="alert alert-danger">
+            <ul *ngFor = "let error of errors">
+                <li>{{ error }}</li>
+            </ul>
+        </div>
+    </form>
+</div>

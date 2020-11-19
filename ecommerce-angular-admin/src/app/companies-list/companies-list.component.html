@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of companies">
+                    <td>{{company._id}}</td>
+                    <td>{{company.name}}</td>
+                    <td>
+                        <button [routerLink]="['/company-edit',company._id]" class="btn btn-primary">Edit</button>
+                        <button (click)="deleteCompany(company._id)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <form class="container" #addCompanyForm="ngForm" >
+            <h3>Add new Company</h3>
+            <div>
+                <label>ID: </label><br>
+                <input name="id" type="number" class="form-control" [(ngModel)]="_id" #idInput="ngModel" required><br>{{_id}}
+            </div>
+            <div *ngIf="idInput.invalid && (idInput.dirty || idInput.touched)" class="alert alert-danger">
+                <div *ngIf="idInput.errors.required">
+                    ID is required and must be a number.
+                </div>
+            </div>
+            <div>
+                <label>Name: </label><br>
+                <input name="name" type="text" class="form-control" [(ngModel)]="name" #nameInput="ngModel" required><br>
+            </div>
+            <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="alert alert-danger">
+                <div *ngIf="nameInput.errors.required">
+                    Name is required
+                </div>
+            </div>
+            <div>
+    <input type="submit" class="btn btn-success" (click)="addNewCompany()" value="add" [disabled]="!addCompanyForm.form.valid">
+            </div>
+            <br><br>
+            <div *ngIf="errors.length > 0">
+                <ul *ngFor = "let error of errors" class="alert alert-danger">
+                    <li>{{ error }}</li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    
+</div>

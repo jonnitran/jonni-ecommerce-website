@@ -1,0 +1,26 @@
+<!--Get Customers-->
+<div class="container">
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers">
+                    <td>{{customer._id}}</td>
+                    <td>{{customer.username}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>
+                        <button [routerLink]="['/customer-edit',customer._id]" class="btn btn-primary">Edit</button>
+                        <button (click)="deleteCustomer(customer._id)" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

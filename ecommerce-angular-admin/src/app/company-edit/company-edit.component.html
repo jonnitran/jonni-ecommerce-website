@@ -1,0 +1,52 @@
+
+<div class="container" *ngIf="company">
+    <form #editCompanyForm="ngForm">
+        <div class="row">
+            <div class="col">
+                ID: 
+            </div>
+            <div class="col-10">
+                <input name='idInput'
+                    class="form-control" 
+                    type="number" 
+                    [(ngModel)]="company._id"
+                    #idInput = 'ngModel'
+                    required>
+            </div>
+        </div>
+        <div *ngIf="idInput.invalid && (idInput.dirty || idInput.touched)" class="alert alert-danger">
+            <div *ngIf="idInput.errors.required">
+                ID is required and must be a number.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Company Name:
+            </div>
+            <div class="col-10">
+                <input name='nameInput'
+                    class="form-control" 
+                    type="text" 
+                    [(ngModel)]="company.name"
+                    #nameInput = 'ngModel'
+                    required>
+            </div>
+        </div>
+        <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="alert alert-danger">
+            <div *ngIf="nameInput.errors.required">
+                Name is required.
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button (click)="SaveCompany()" class="btn btn-success" [disabled]="!editCompanyForm.form.valid">Confirm</button>
+            <button [routerLink]="['/../companies-list/']" class="btn btn-danger">Cancel</button>
+        </div>
+        <br>
+        <div *ngIf="errors.length > 0" class="alert alert-danger">
+            <ul *ngFor = "let error of errors">
+                <li>{{ error }}</li><!--This works her for some reason-->
+            </ul>
+        </div>
+    </form>
+</div>

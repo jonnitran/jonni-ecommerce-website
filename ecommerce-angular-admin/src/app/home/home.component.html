@@ -1,0 +1,23 @@
+<div *ngIf="notify" class="alert alert-success container marge">
+    {{ notify }}
+</div>
+<div class="container">
+    <h1>Welcome!</h1>
+    <ng-container *ngIf="auth.isAuthenticated()">
+        <h5>Please select a link to manage the contents of the database.</h5>
+        <ul>
+            <li>
+                <a class="nav-link" [routerLink]="['/companies-list']">Manage Companies</a>
+            </li>
+            <li>
+                <a class="nav-link" [routerLink]="['/products-list']">Manage Products</a>
+            </li>
+            <li>
+                <a class="nav-link" [routerLink]="['/customers-list']">Manage Customers</a>
+            </li>
+        </ul>
+    </ng-container>
+    <ng-container *ngIf="!auth.isAuthenticated()">
+        <h5>Please log in to manage the ecommerce website</h5>
+    </ng-container>
+</div>

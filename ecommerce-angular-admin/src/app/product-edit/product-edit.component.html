@@ -1,0 +1,98 @@
+<div class="container">
+    <form #editProductForm="ngForm">
+        <div class="row">
+            <div class="col">
+                ID: 
+            </div>
+            <div class="col-10">
+                <input name='idInput'
+                    class="form-control" 
+                    type="number" 
+                    [(ngModel)]="product._id"
+                    #idInput = 'ngModel'
+                    required>
+            </div>
+        </div>
+        <div *ngIf="idInput.invalid && (idInput.dirty || idInput.touched)" class="alert alert-danger">
+            <div *ngIf="idInput.errors.required">
+                ID is required and must be a number.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Product Name:
+            </div>
+            <div class="col-10">
+                <input name='nameInput'
+                    class="form-control" 
+                    type="text" 
+                    [(ngModel)]="product.name"
+                    #nameInput = 'ngModel'
+                    required>
+            </div>
+        </div>
+        <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)" class="alert alert-danger">
+            <div *ngIf="nameInput.errors.required">
+                Name is required.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Product Price:
+            </div>
+            <div class="col-10">
+                <input name='priceInput'
+                    class="form-control" 
+                    type="number" 
+                    [(ngModel)]="product.price"
+                    #priceInput = 'ngModel'
+                    step=".01"
+                    required>
+            </div>
+        </div>
+        <div *ngIf="priceInput.invalid && (priceInput.dirty || priceInput.touched)" class="alert alert-danger">
+            <div *ngIf="priceInput.errors.required">
+                Price is required.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Product Image Link:
+            </div>
+            <div class="col-10">
+                <input name='imageInput'
+                    class="form-control" 
+                    type="text" 
+                    [(ngModel)]="product.image"
+                    #imageInput = 'ngModel'
+                    required>
+            </div>
+        </div>
+        <div *ngIf="imageInput.invalid && (imageInput.dirty || imageInput.touched)" class="alert alert-danger">
+            <div *ngIf="imageInput.errors.required">
+                Image is required.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Company:
+            </div>
+            <div class="col-10">
+                <select class="selectpicker dropdown form-control" [(ngModel)]="product.company" data-live-search="true">
+                    <option *ngFor="let company of companies" [value]="company.name">{{company.name}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button (click)="SaveProduct()" class="btn btn-success" [disabled] = "!editProductForm.form.valid">Confirm</button>
+            <button [routerLink]="['/../products-list/']" class="btn btn-danger">Cancel</button>
+        </div>
+        <br>
+        <div *ngIf="errors.length > 0" class="alert alert-danger">
+            <ul *ngFor = "let error of errors">
+                <li>{{ error }}</li>
+            </ul>
+        </div>
+    </form>
+</div>
